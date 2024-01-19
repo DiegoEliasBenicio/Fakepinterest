@@ -5,7 +5,10 @@ from flask_bcrypt import Bcrypt
 
 
 app = Flask(__name__) # criando o app com o nome do projeto
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db'
+if os.getenv("DEBUG") == 0:
+    link_banco = "sqlite://comunidade.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL"
+                                                  "")
 app.config['SECRET_KEY'] = '8af8ab21d207f0c1ef62782bef3c4580'
 app.config['UPLOAD_FOLDER'] = 'static/fotos_posts'
 
